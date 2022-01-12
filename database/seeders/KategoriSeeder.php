@@ -13,6 +13,12 @@ class KategoriSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $data = [
+            'kategori'=>'Minuman',
+            'nama'=>'Indomilk',
+            'deskripsi'=>'Susu murni yang lezat dan bergizi yang 
+            baik untuk anak anak serta baik untuk pertumbuhan'
+        ];
+        Kategori::create($data);
     }
 }

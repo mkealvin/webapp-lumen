@@ -14,10 +14,10 @@ class PelangganSeeder extends Seeder
     public function run()
     {
         $data = [
-            'pelanggan'=>'Dodi',
-            'alamat'=>'Karanganyar',
-            'telp'=>'0892876712'
+            'pelanggan' => 'Dodi',
+            'alamat' => 'Karanganyar',
+            'telp' => '0892876712'
         ];
-        Pelanggan::create($data);
+        //Pelanggan::create($data);
     }
 }

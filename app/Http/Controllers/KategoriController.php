@@ -26,7 +26,14 @@ class KategoriController extends Controller
     public function create(Request $request)
     {
         //
-        return response()->json($request);
+        $this->validate($request, [
+            'kategori' => 'required',
+            'nama' => 'required',
+            'deskripsi' => 'required',
+            'harga' => 'required'
+        ]);
+        $kategori = Kategori::create($request->all());
+        return response()->json('$kategori');
     }
 
     /**
@@ -70,10 +77,11 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kategori $kategori)
+    public function update(Request $request, $id)
     {
-        //
-        return response()->json("ini update");
+        // mengupdate data dengan di isi melalu parameter $request
+        Kategori::where('idkategori', '$id')->update($request->all());
+        return response()->json("Data Telah Terupdate");
     }
 
     /**
@@ -82,8 +90,9 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kategori $kategori)
+    public function destroy($id)
     {
-        return response()->json("ini delete $kategori");
+        Kategori::where('idkategori', $id)->delete();
+        return response()->json("Data Telah Terhapus");
     }
 }

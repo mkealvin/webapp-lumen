@@ -23,9 +23,17 @@ class PelangganController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        // memvalidasi field harus terisi
+        $this->validate($request, [
+            'username' => 'required|unique',
+            'password' => 'required',
+            'nama' => 'required'
+        ]);
+        // mengisi data pada database 
+        $pelanggan = Pelanggan::create($request->all());
+        return response()->json('$pelanggan');
     }
 
     /**
@@ -69,9 +77,11 @@ class PelangganController extends Controller
      * @param  \App\Models\Pelanggan  $pelanggan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pelanggan $pelanggan)
+    public function update(Request $request, $id)
     {
-        //
+        // mengupdate smua data yang di masukan
+        Pelanggan::where('idpelanggan', '$id')->update($request->all());
+        return response()->json("Data Telah Terupdate");
     }
 
     /**
@@ -80,8 +90,9 @@ class PelangganController extends Controller
      * @param  \App\Models\Pelanggan  $pelanggan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pelanggan $pelanggan)
+    public function destroy($id)
     {
-        //
+        Pelanggan::where('idpelanggan', $id)->delete();
+        return response()->json("Data Telah Terhapus");
     }
 }
